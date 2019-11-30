@@ -1,4 +1,4 @@
-# WhereDoesTheQueenGoes
+# Where Does The Queen Goes
 **"WhereDoesTheQueenGoes"** is a small and simple logic problem were in a defined matrix the program will try to put as much queen's as possible without each one attacking each other. we can define the size of the table and also the first position of the starting queen.
 
 Just for the meme's, I've been testing a little bit with some big boards, here is the response for each one positioning the queen in the position 0:
