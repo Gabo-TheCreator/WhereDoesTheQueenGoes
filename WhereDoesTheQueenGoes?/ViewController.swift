@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var xAndyLenght = 1000
+    var xAndyLenght = 10000
     let firstPositionOfTheQueen = 0 //Starting From 0
     
     var firstValueOfTheQueen = 0
@@ -36,13 +36,13 @@ class ViewController: UIViewController {
                                                  matrix: self.linearMatrix,
                                                  positionMatrix: self.positionMatrix) { (result) in
                                                     if let nextPosition = self.searchForNextNilPosition(linearMatrix: result) {
-                                                    self.looper(valueOfTheQueen: nextPosition + 1)
-                                                } else {
+                                                        self.looper(valueOfTheQueen: nextPosition + 1)
+                                                    } else {
                                                         let truePositions = self.getTruePositions(linearMatrix: self.linearMatrix)
-                                                    print("All the queen positions are:")
-                                                    print(truePositions)
-                                                    print("The total of queens are: \(truePositions.count)")
-                                                }
+                                                        print("All the queen positions are:")
+                                                        print(truePositions)
+                                                        print("The total of queens are: \(truePositions.count)")
+                                                    }
             }
         }
     }
