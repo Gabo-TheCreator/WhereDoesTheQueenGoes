@@ -10,11 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var xAndyLenght = 10
-    var linearMatrix : [Bool?] = []
-    let firstPositionOfTheQueen = 99
+    var xAndyLenght = 1000
+    let firstPositionOfTheQueen = 0 //Starting From 0
+    
     var firstValueOfTheQueen = 0
-
+    var linearMatrix : [Bool?] = []
     var positionMatrix : [[Int]] = []
 
     
@@ -31,15 +31,19 @@ class ViewController: UIViewController {
     }
     
     func looper (valueOfTheQueen: Int) {
-        applyChangesDependingOnNewQueen(newQueenWithValue: valueOfTheQueen,
-                                        matrix: linearMatrix,
-                                        positionMatrix: positionMatrix) { (result) in
-                                            if let nextPosition = searchForNextNilPosition(linearMatrix: result) {
-                                                looper(valueOfTheQueen: nextPosition + 1)
-                                            } else {
-                                                print("All the queen positions are:")
-                                                print(getTruePositions(linearMatrix: linearMatrix))
-                                            }
+        DispatchQueue.main.async {
+            self.applyChangesDependingOnNewQueen(newQueenWithValue: valueOfTheQueen,
+                                                 matrix: self.linearMatrix,
+                                                 positionMatrix: self.positionMatrix) { (result) in
+                                                    if let nextPosition = self.searchForNextNilPosition(linearMatrix: result) {
+                                                    self.looper(valueOfTheQueen: nextPosition + 1)
+                                                } else {
+                                                        let truePositions = self.getTruePositions(linearMatrix: self.linearMatrix)
+                                                    print("All the queen positions are:")
+                                                    print(truePositions)
+                                                    print("The total of queens are: \(truePositions.count)")
+                                                }
+            }
         }
     }
     
@@ -94,6 +98,7 @@ class ViewController: UIViewController {
 
     func setFirstPosition (position: Int, matrix: [Bool?]) -> [Bool?] {
         var newMatrix = matrix
+        print("New Queen at \(position)")
         newMatrix[position] = true
         return newMatrix
     }
@@ -104,6 +109,7 @@ class ViewController: UIViewController {
         // Set true this Queen
         var matrixAfterTrue = matrix
         matrixAfterTrue[newQueenWithValue - 1] = true
+        print("New Queen at \(newQueenWithValue - 1)")
         
         // Search For Line
         let matrixAfterLineModified = invalidateValuesInLinearMatrix(valuesToInvalidate: searchForLineValues(queenWithValue: newQueenWithValue,
